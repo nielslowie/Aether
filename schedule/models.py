@@ -37,7 +37,7 @@ class Class(models.Model):
     start_date_time = models.DateTimeField()
     end_date_time = models.DateTimeField()
 
-    vak = models.ForeignKey(Course)
+    course = models.ForeignKey(Course)
     teacher = models.ForeignKey(Teacher, null=True)
 
     activity = models.CharField(max_length=64, blank=True)
