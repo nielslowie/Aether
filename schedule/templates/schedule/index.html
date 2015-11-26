@@ -1,5 +1,7 @@
 {% extends 'schedule/base.html' %}
-
+{% block js %}
+    {% include 'schedule/js_map.html' %}
+{% endblock %}
 {% block content %}
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -28,6 +30,26 @@
         </div>
         <div style="overflow:auto">
             {% include 'schedule/_schedule.html' %}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Navigation
+        </div>
+        <div id="map"></div>
+        <div class="panel-body">
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <div class="text-left"><label for="myRange" id="range">Range:</label></div>
+                    <input type="range" id="myRange" min="0" max="100" value="50" onchange="changeRange()">
+                    <input type="button" class="btn btn-default" value="Toggle traffic layer" onclick="toggleTrafficLayer()">
+                </div>
+                <div class="col-md-6">
+                    <div class="text-left"><label for="myOpacity" id="opacity">Opacity:</label></div>
+                    <input type="range" id="myOpacity" min="0" max="100" value="50" onchange="changeOpacity()">
+                    <input type="button" class="btn btn-default" value="Toggle visibility" onclick="densiteitOverlay.toggle();">
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
