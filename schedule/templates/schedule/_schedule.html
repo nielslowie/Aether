@@ -22,7 +22,30 @@
         <tr>
             <td colspan="2">{{ day.name }}</td>
             {% for class in day.classes %}
-                <td colspan="{{ class.duration }}">{{ class.course.name }}</td>
+                {% if class %}
+                    <td colspan="{{ class.duration }}">
+                        <a href="#" data-toggle="modal" data-target="#{{ class.id }}modal">{{ class.course.name }}</a>
+                        <br>
+                        <small class="text-muted">{{ class.activity }}</small>
+                    </td>
+                    <div class="modal fade" id="{{ class.id }}modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="{{ class.id }}id">{{ class.course.name }}</h4>
+                                    <small class="text-muted">{{ class.activity }}</small>
+                                </div>
+                                <div class="modal-body">
+                                    {{ class.topic }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <td></td>
+                {% endif %}
             {% endfor %}
         </tr>
     {% endfor %}
