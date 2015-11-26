@@ -1,8 +1,9 @@
 import datetime
 
 import isoweek
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.core.mail import send_mail
+from django.http import HttpResponse, BadHeaderError
+from django.shortcuts import render, redirect
 
 from .forms import ContactForm
 from .models import Subject
