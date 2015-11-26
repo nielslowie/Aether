@@ -1,0 +1,21 @@
+<form role="form" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.sender.id_for_label }}">Sender:</label>
+        <input type="email" class="form-control" id="{{ form.sender.id_for_label }}"
+               name="{{ form.sender.html_name }}" placeholder="Enter your email">
+    </div>
+    <div class="form-group">
+        <label for="{{ form.subject.id_for_label }}">Subject:</label>
+        <input type="text" class="form-control" id="{{ form.subject.id_for_label }}"
+               name="{{ form.subject.html_name }}" placeholder="Enter a subject">
+    </div>
+    <div class="form-group">
+        <label for="{{ form.message.id_for_label }}">Message:</label>
+            <textarea class="form-control" id="{{ form.message.id_for_label }}" name="{{ form.message.html_name }}"
+                      placeholder="Enter a message" style="height:200px"></textarea>
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+</form>

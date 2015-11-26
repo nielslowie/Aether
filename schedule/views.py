@@ -4,6 +4,7 @@ import isoweek
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from .forms import ContactForm
 from .models import Subject
 
 
@@ -48,15 +49,12 @@ def index(request):
 
     week = isoweek.Week.thisweek()
 
-    week_index = 0
+    try:
+        week_index = int(request.GET["week"])
+    except:
+        week_index = 0
 
-    if request.method == "GET":
-        try:
-            week_index = int(request.GET["week"])
-
-            week += week_index
-        except:
-            pass
+    week += week_index
 
     start_date = week.monday()
     end_date = week.sunday()
@@ -75,8 +73,24 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse("About")
+    return render(request, "schedule/about.html")
 
 
 def contact(request):
-    return HttpResponse("Contact")
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            sender = form.cleaned_data['sender']
+            message = form.cleaned_data['message']
+
+            try:
+                send_mail(subject, message, sender, ['project.aeolus.aether@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('index')
+
+    return render(request, "schedule/contact.html", {'form': form})
