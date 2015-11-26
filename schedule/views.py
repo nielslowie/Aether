@@ -1,8 +1,16 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+
+from .models import Subject
 
 
 def index(request):
-    return HttpResponse("Index")
+    # Test value
+    subject = Subject.objects.all()[0]
+
+    context = {'subject': subject}
+
+    return render(request, 'schedule/index.html', context)
 
 
 def about(request):

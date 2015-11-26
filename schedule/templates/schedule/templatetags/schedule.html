@@ -1,0 +1,29 @@
+<table class="table table-bordered" style="margin-bottom:0">
+    <tr>
+        <td>
+            <a href="">
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </button>
+            </a>
+        </td>
+        <td>
+            <a href="">
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                </button>
+            </a>
+        </td>
+        {% for hour in schedule.hours %}
+            <th>{{ hour }}</th>
+        {% endfor %}
+    </tr>
+    {% for day in schedule.days %}
+        <tr>
+            <td colspan="2">{{ day.name }}</td>
+            {% for class in day.classes %}
+                <td colspan="{{ class.duration }}">{{ class.course.name }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>

@@ -27,7 +27,7 @@ class Location(models.Model):
     def __str__(self):
         string = self.street + ", " + self.city
 
-        if self.naam != "":
+        if self.name != "":
             string += " (" + self.name + ")"
 
         return string
@@ -45,11 +45,17 @@ class Class(models.Model):
 
     location = models.ForeignKey(Location, null=True)
 
+    def _duration(self):
+        return int((self.end_date_time - self.start_date_time).seconds / 1800)
+
+    duration = property(_duration)
+
     def __str__(self):
-        return self.vak.__str__()
+        return self.course.__str__()
 
     class Meta:
         ordering = ['start_date_time']
+        verbose_name_plural = "classes"
 
 
 class Subject(models.Model):
