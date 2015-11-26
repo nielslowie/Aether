@@ -1,14 +1,14 @@
 <table class="table table-bordered" style="margin-bottom:0">
     <tr>
         <td>
-            <a href="">
+            <a href="{% url 'index' %}?week={{ week|add:"-1" }}">
                 <button type="button" class="btn btn-default">
                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </button>
             </a>
         </td>
         <td>
-            <a href="">
+            <a href="{% url 'index' %}?week={{ week|add:"1" }}">
                 <button type="button" class="btn btn-default">
                     <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
                 </button>

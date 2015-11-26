@@ -1,7 +1,5 @@
 {% extends 'schedule/base.html' %}
 
-{% load schedule %}
-
 {% block content %}
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -29,7 +27,7 @@
             Schedule
         </div>
         <div style="overflow:auto">
-            {% show_schedule subject %}
+            {% include 'schedule/_schedule.html' %}
         </div>
     </div>
 {% endblock %}
